@@ -262,12 +262,10 @@ func main() {
 	}
 	r := gin.Default()
 	r.GET("/", Index)
-	r.GET("/go", ResultSet)
-	r.POST("/go", ResultSet)
+	r.Match([]string{http.MethodGet, http.MethodPost}, ResultSet)
 	r.GET("/ws", ws)
 	r.GET("/wst", wsTest)
-	r.GET("/execjs", Execjs)
-	r.POST("/execjs", Execjs)
+	r.Match([]string{http.MethodGet, http.MethodPost}, Execjs)
 	r.GET("/list", getList)
 	r.Use(TlsHandler())
 
